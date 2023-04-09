@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eWads", "eWads.csproj", "{5D90018F-6887-49C5-9FEA-D81BDB12DB33}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eWads_wpf", "eWads_wpf.csproj", "{5D90018F-6887-49C5-9FEA-D81BDB12DB33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eWadsLib", "..\eWadsLib\eWadsLib.csproj", "{06D3E15B-D1F1-48BB-A29B-3C99289424E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eWadsLib", "..\..\eWadsLib\eWadsLib\eWadsLib.csproj", "{8C83CB3E-F373-4D3E-B818-F2383FA4D308}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{5D90018F-6887-49C5-9FEA-D81BDB12DB33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D90018F-6887-49C5-9FEA-D81BDB12DB33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D90018F-6887-49C5-9FEA-D81BDB12DB33}.Release|Any CPU.Build.0 = Release|Any CPU
-		{06D3E15B-D1F1-48BB-A29B-3C99289424E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{06D3E15B-D1F1-48BB-A29B-3C99289424E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{06D3E15B-D1F1-48BB-A29B-3C99289424E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{06D3E15B-D1F1-48BB-A29B-3C99289424E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C83CB3E-F373-4D3E-B818-F2383FA4D308}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C83CB3E-F373-4D3E-B818-F2383FA4D308}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C83CB3E-F373-4D3E-B818-F2383FA4D308}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C83CB3E-F373-4D3E-B818-F2383FA4D308}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
