@@ -8,22 +8,48 @@ namespace eWads.ViewModels
 {
     public class LoginPageViewModel : Conductor<object>
     {
+        //Data user - inputs
         public string Email { get; set; }
         public string Pwd { get; set; }
 
-        public LoginPageViewModel() 
+        //LoginText - show text "logging in" when in process login to services
+        private Visibility _loginText = Visibility.Hidden;
+        public Visibility LoginText
         {
-            AppShellViewModel.Title = "eWads - login";
+            get { return _loginText; }
+            set
+            {
+                _loginText = value;
+                NotifyOfPropertyChange(() => LoginText);
+            }
         }
+
+        //Login panel - forms
+        private Visibility _loginPanel = Visibility.Visible;
+        public Visibility LoginPanel
+        {
+            get { return _loginPanel; }
+            set
+            {
+                _loginPanel = value;
+                NotifyOfPropertyChange(() => LoginPanel);
+            }
+        }
+
+        public LoginPageViewModel() => AppShellViewModel.SetTitle("eWads - login");
 
         public async Task LoginToServicesAsync()
         {
+            LoginPanel = Visibility.Hidden;
+            LoginText = Visibility.Visible;
+
             Authentication auth = new Authentication();
             bool res = await Task.Run(() => auth.InitLogin(Email, Pwd));
             if (res)
-                MessageBox.Show("logged In!");
-            else
-                MessageBox.Show("Incorrect data!");
+                AppShellViewModel.SetPage(new UserPanelViewModel(), "eWads - News");
+
+            LoginPanel = Visibility.Visible;
+            LoginText = Visibility.Hidden;
         }
     }
 }
