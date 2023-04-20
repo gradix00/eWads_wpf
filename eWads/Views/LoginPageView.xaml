@@ -7,6 +7,24 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="250"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+            <TextBlock Text="Login"/>
+            <TextBox x:Name="Email"/>
+            <TextBlock Text="Password"/>
+            <TextBox x:Name="Pwd"/>
+            <Button Content="Login to eWads" x:Name="LoginToServices"/>
+        </StackPanel>
     </Grid>
 </UserControl>
