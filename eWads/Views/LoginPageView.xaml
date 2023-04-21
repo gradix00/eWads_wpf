@@ -34,6 +34,6 @@
         </Border>
 
         <TextBlock Visibility="{Binding LoginText}" Text="Logging in..." Grid.Row="1" Grid.Column="1" Foreground="White"
-                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
     </Grid>
 </UserControl>

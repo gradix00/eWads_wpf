@@ -6,7 +6,35 @@
              xmlns:local="clr-namespace:eWads.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="CornflowerBlue">
-        
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="40"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Column="1" CornerRadius="15" BorderThickness="6" BorderBrush="CornflowerBlue" Margin="15, 30, 15, 0">
+            <StackPanel Background="CornflowerBlue">
+                <TextBlock Text="eWads" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           FontSize="25"/>
+            </StackPanel>
+        </Border>
+
+        <Button Content="Add" x:Name="RefreshPosts"/>
+
+        <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="20, 0, 20, 0">
+            <ItemsControl ItemsSource="{Binding Posts}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Content="{Binding}" Height="300"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>
