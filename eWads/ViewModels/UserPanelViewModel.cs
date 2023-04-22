@@ -14,13 +14,53 @@ namespace eWads.ViewModels
     {
         public ObservableCollection<object> Posts { get; set; } = new ObservableCollection<object>();
 
+        //Panel with posts
+        private Visibility _postsPanel;
+        public Visibility PostsPanel
+        {
+            get => _postsPanel;
+            set
+            {
+                _postsPanel = value;
+                NotifyOfPropertyChange(() => PostsPanel);
+            }
+        }
+
+        //Text loading...
+        private Visibility _loadingText = Visibility.Hidden;
+        public Visibility LoadingText
+        {
+            get => _loadingText;
+            set
+            {
+                _loadingText = value;
+                NotifyOfPropertyChange(() => LoadingText);
+            }
+        }
+
+        public UserPanelViewModel()
+        {
+            RefreshPosts();
+        }
+
+        public void OpenCreatorPost()
+        {
+            throw new NotImplementedException();
+        }
+
         public async void RefreshPosts()
         {
+            PostsPanel = Visibility.Hidden;
+            LoadingText = Visibility.Visible;
+
             var getPosts = await PostService.LoadAllPosts();
             foreach (var post in getPosts)
             {
                 Posts.Add(CreatePost(post));
             }
+
+            PostsPanel = Visibility.Visible;
+            LoadingText = Visibility.Hidden;
         }
 
         private StackPanel CreatePost(PostData post)

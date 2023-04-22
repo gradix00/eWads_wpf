@@ -25,9 +25,13 @@
             </StackPanel>
         </Border>
 
-        <Button Content="Add" x:Name="RefreshPosts"/>
+        <Button Content="Post" x:Name="OpenCreatorPost"/>
 
-        <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="20, 0, 20, 0">
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="Loading posts" Visibility="{Binding LoadingText}"
+                   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="CornflowerBlue"
+                   FontSize="15"/>
+        
+        <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="20, 0, 20, 0" Visibility="{Binding PostsPanel}">
             <ItemsControl ItemsSource="{Binding Posts}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
