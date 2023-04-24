@@ -11,6 +11,7 @@ namespace eWads.ViewModels
         //Data user - inputs
         public string Email { get; set; }
         public string Pwd { get; set; }
+        public string Info { get; set; }
 
         //LoginText - show text "logging in" when in process login to services
         private Visibility _loginText = Visibility.Hidden;
@@ -46,7 +47,12 @@ namespace eWads.ViewModels
             Authentication auth = new Authentication();
             bool res = await Task.Run(() => auth.InitLogin(Email, Pwd));
             if (res)
-                AppShellViewModel.SetPage(new UserPanelViewModel(), "eWads - News");
+            {
+                var getUser = await UserService.GetInfoUser(Email);
+                AppShellViewModel.SetPage(new UserPanelViewModel(getUser), "eWads - News");
+            }
+            else
+                Info = "Incorrect email or password!";
 
             LoginPanel = Visibility.Visible;
             LoginText = Visibility.Hidden;

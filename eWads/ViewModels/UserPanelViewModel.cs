@@ -12,7 +12,8 @@ namespace eWads.ViewModels
 {
     public class UserPanelViewModel : Conductor<object>
     {
-        public ObservableCollection<object> Posts { get; set; } = new ObservableCollection<object>();
+        public ObservableCollection<PostData> Posts { get; set; } = new ObservableCollection<PostData>();
+        public static UserData UserData { get; set; }
 
         //Panel with posts
         private Visibility _postsPanel;
@@ -38,14 +39,10 @@ namespace eWads.ViewModels
             }
         }
 
-        public UserPanelViewModel()
+        public UserPanelViewModel(UserData data)
         {
+            UserData = data;
             RefreshPosts();
-        }
-
-        public void OpenCreatorPost()
-        {
-            throw new NotImplementedException();
         }
 
         public async void RefreshPosts()
@@ -53,53 +50,26 @@ namespace eWads.ViewModels
             PostsPanel = Visibility.Hidden;
             LoadingText = Visibility.Visible;
 
+            //CreateItem(new CreatorPostViewModel(UserData));
             var getPosts = await PostService.LoadAllPosts();
             foreach (var post in getPosts)
-            {
-                Posts.Add(CreatePost(post));
-            }
+                Posts.Add(post);
 
             PostsPanel = Visibility.Visible;
             LoadingText = Visibility.Hidden;
         }
 
-        private StackPanel CreatePost(PostData post)
+        private StackPanel CreateItem(object item)
         {
             StackPanel panel = new StackPanel();
-
-            TextBlock titleBlock = new TextBlock()
+            ContentControl content = new ContentControl()
             {
-                Text = post.Title,
-                VerticalAlignment = VerticalAlignment.Top,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                FontSize = 25
+                Name = "ActiveItem",
+                Height = 250
             };
 
-            Image image = new Image()
-            {
-                Source = new BitmapImage(post.UrlImage)
-            };
-
-            StackPanel bgDescription = new StackPanel()
-            {
-                Background = new SolidColorBrush(Colors.CornflowerBlue),
-                Margin = new Thickness(20)
-            };
-
-            TextBlock descriptionBlock = new TextBlock()
-            {
-                Text = post.Description,
-                VerticalAlignment = VerticalAlignment.Top,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                FontSize = 20,
-                Foreground = new SolidColorBrush(Colors.White)
-            };
-            bgDescription.Children.Add(descriptionBlock);
-
-            panel.Children.Add(titleBlock);
-            panel.Children.Add(image);
-            panel.Children.Add(bgDescription);
-
+            panel.Children.Add(content);
+            ActivateItemAsync(item);
             return panel;
         }
     }

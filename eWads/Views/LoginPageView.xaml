@@ -30,6 +30,8 @@
                 <TextBlock Text="Password"/>
                 <TextBox x:Name="Pwd"/>
                 <Button Content="Login to eWads" x:Name="LoginToServices"/>
+                <TextBlock Text="{Binding Info}" HorizontalAlignment="Center"
+                           FontStyle="Italic" Foreground="Red"/>
             </StackPanel>
         </Border>
 

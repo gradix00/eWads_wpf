@@ -82,10 +82,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModels\AppShellViewModel.cs" />
+    <Compile Include="ViewModels\CreatorPostViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\UserPanelViewModel.cs" />
     <Compile Include="Views\AppShellView.xaml.cs">
       <DependentUpon>AppShellView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreatorPostView.xaml.cs">
+      <DependentUpon>CreatorPostView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginPageView.xaml.cs">
       <DependentUpon>LoginPageView.xaml</DependentUpon>
@@ -124,6 +128,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\AppShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreatorPostView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
