@@ -19,10 +19,30 @@
         </Grid.RowDefinitions>
 
         <Border Grid.Column="1" CornerRadius="15" BorderThickness="6" BorderBrush="CornflowerBlue" Margin="15, 30, 15, 0">
-            <StackPanel Background="CornflowerBlue">
-                <TextBlock Text="eWads" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
+            <Grid Background="CornflowerBlue">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="1" Text="eWads" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
                            FontSize="25"/>
-            </StackPanel>
+                
+                <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Style="{DynamicResource ButtonRounded}" Content="My profile" Background="White" 
+                        Foreground="CornflowerBlue" Width="90" Margin="2, 0, 2, 0"/>
+
+                    <Button Style="{DynamicResource ButtonRounded}" Content="Settings" Background="White" 
+                        Foreground="CornflowerBlue" Width="90" Margin="2, 0, 2, 0"/>
+                </StackPanel>
+                <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button Style="{DynamicResource ButtonRounded}" x:Name="OpenCreatorPost" Content="New post" Background="White"
+                        Foreground="CornflowerBlue" Width="90"/>
+                    <Button Style="{DynamicResource ButtonRounded}" x:Name="RefreshPosts" Content="Refresh" Background="White"
+                        Foreground="CornflowerBlue" Width="90"/>
+                </StackPanel>
+            </Grid>
         </Border>
 
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Loading posts" Visibility="{Binding LoadingText}"
@@ -34,21 +54,30 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border BorderThickness="2" BorderBrush="CornflowerBlue" CornerRadius="25"
-                                MinHeight="450" MinWidth="400" MaxHeight="700" MaxWidth="600" Margin="10">
+                                MinHeight="150" MinWidth="400" MaxHeight="700" MaxWidth="600" Margin="10"
+                                Background="CornflowerBlue">
                             <StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
+                                <Grid Margin="5, 5, 5, 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
 
-                                        <Label Content="{Binding Title}"/>
-                                        <Label Grid.Column="1" Content="{Binding CreationDate}" HorizontalContentAlignment="Right"/>
-                                    </Grid>
-                                </StackPanel>
-                                <Label Content="{Binding Description}" VerticalContentAlignment="Stretch"/>
-                                <Image Source="{Binding UrlImage}"/>
+                                    <TextBlock Text="{Binding Title}" FontSize="20" FontStretch="SemiExpanded"
+                                               TextWrapping="WrapWithOverflow"
+                                               Foreground="White"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding CreationDate}" 
+                                               HorizontalAlignment="Right"
+                                               Foreground="White"/>
+                                </Grid>
+                                
+                                <Label Content="{Binding Description}" VerticalContentAlignment="Stretch"
+                                       Foreground="White"/>
+
+                                <Image Source="{Binding UrlImage}" Margin="10"/>
+                                <Label Content="{Binding Autor}" Foreground="White"
+                                       HorizontalAlignment="Stretch"
+                                       HorizontalContentAlignment="Center"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>

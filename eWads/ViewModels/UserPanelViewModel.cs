@@ -45,32 +45,25 @@ namespace eWads.ViewModels
             RefreshPosts();
         }
 
+        public void OpenCreatorPost()
+        {
+            AppShellViewModel.SetPage(new CreatorPostViewModel(UserData), "eWads - New post");
+        }
+
         public async void RefreshPosts()
         {
             PostsPanel = Visibility.Hidden;
             LoadingText = Visibility.Visible;
+            Posts.Clear();
 
-            //CreateItem(new CreatorPostViewModel(UserData));
-            var getPosts = await PostService.LoadAllPosts();
+            var getPosts = await PostService.LoadAllPosts(5);
             foreach (var post in getPosts)
+            {
                 Posts.Add(post);
+            }
 
             PostsPanel = Visibility.Visible;
             LoadingText = Visibility.Hidden;
-        }
-
-        private StackPanel CreateItem(object item)
-        {
-            StackPanel panel = new StackPanel();
-            ContentControl content = new ContentControl()
-            {
-                Name = "ActiveItem",
-                Height = 250
-            };
-
-            panel.Children.Add(content);
-            ActivateItemAsync(item);
-            return panel;
         }
     }
 }

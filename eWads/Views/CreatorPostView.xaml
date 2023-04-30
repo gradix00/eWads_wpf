@@ -9,6 +9,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -18,10 +19,38 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <TextBox x:Name="Title" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+        <TextBox x:Name="Title" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"
                    FontSize="25"/>
-        <TextBox x:Name="Description" Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Justify"
+        <TextBox x:Name="Description" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Justify"
                    FontSize="20" FontStyle="Italic"/>
-        <Button Grid.Row="2" Grid.Column="1" Content="Publish post" x:Name="PublishPost"/>
+        <Button Grid.Row="2" Content="Publish post" x:Name="PublishPost"/>
+
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBox x:Name="SearchPhrase"/>
+            <Button Grid.Column="1" Content="Search" x:Name="LoadImages"/>
+        </Grid>
+
+        <ScrollViewer Grid.Row="3" Grid.ColumnSpan="2">
+            <ItemsControl ItemsSource="{Binding Images}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Height="160" Width="160">
+                            <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}"/>
+                            <Image Source="{Binding Source}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>
