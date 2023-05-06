@@ -82,9 +82,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Helpers\ImageData.cs" />
+    <Compile Include="Helpers\RequestData.cs" />
     <Compile Include="ViewModels\AppShellViewModel.cs" />
     <Compile Include="ViewModels\CreatorPostViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
+    <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\UserPanelViewModel.cs" />
     <Compile Include="Views\AppShellView.xaml.cs">
       <DependentUpon>AppShellView.xaml</DependentUpon>
@@ -94,6 +96,9 @@
     </Compile>
     <Compile Include="Views\LoginPageView.xaml.cs">
       <DependentUpon>LoginPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProfileView.xaml.cs">
+      <DependentUpon>ProfileView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserPanelView.xaml.cs">
       <DependentUpon>UserPanelView.xaml</DependentUpon>
@@ -137,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LoginPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProfileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

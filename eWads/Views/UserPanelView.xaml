@@ -3,13 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:eWads.Views"
+             xmlns:local="clr-namespace:eWads.Views" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+             xmlns:cal="http://caliburnmicro.com"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="40"/>
-            <ColumnDefinition/>
+            <ColumnDefinition MaxWidth="300" MinWidth="120" Width="220"/>
+            <ColumnDefinition />
+            <ColumnDefinition MaxWidth="300" MinWidth="120" Width="220"/>
             <ColumnDefinition Width="40"/>
         </Grid.ColumnDefinitions>
 
@@ -18,7 +22,12 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Column="1" CornerRadius="15" BorderThickness="6" BorderBrush="CornflowerBlue" Margin="15, 30, 15, 0">
+        <Border Grid.Column="1" 
+                Grid.ColumnSpan="3" 
+                CornerRadius="15" 
+                BorderThickness="6" 
+                BorderBrush="CornflowerBlue" 
+                Margin="15, 30, 15, 0">
             <Grid Background="CornflowerBlue">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -30,7 +39,7 @@
                            FontSize="25"/>
                 
                 <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Style="{DynamicResource ButtonRounded}" Content="My profile" Background="White" 
+                    <Button Style="{DynamicResource ButtonRounded}" x:Name="OpenWindowProfile" Content="My profile" Background="White" 
                         Foreground="CornflowerBlue" Width="90" Margin="2, 0, 2, 0"/>
 
                     <Button Style="{DynamicResource ButtonRounded}" Content="Settings" Background="White" 
@@ -45,11 +54,65 @@
             </Grid>
         </Border>
 
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="Loading posts" Visibility="{Binding LoadingText}"
+        <TextBlock Grid.Row="1" Grid.Column="2" Text="Loading posts" Visibility="{Binding LoadingText}"
                    VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="CornflowerBlue"
                    FontSize="15"/>
 
-        <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="25, 0, 25, 0" Visibility="{Binding PostsPanel}">
+        <TextBlock Text="Friend requests" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center"
+                   Foreground="CornflowerBlue"
+                   FontSize="13"/>
+        <Border Grid.Column="1"
+                Grid.Row="1"
+                CornerRadius="15" 
+                BorderThickness="6" 
+                Margin="15"
+                BorderBrush="CornflowerBlue">
+            <ScrollViewer Background="CornflowerBlue">
+                <ItemsControl ItemsSource="{Binding Requests}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding FirstName}" Margin="0, 0, 2, 0"/>
+                                        <TextBlock Text="{Binding LastName}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                        <Button Content="{Binding Accept}" CommandParameter="{Binding UserId}" x:Name="acpt">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Click">
+                                                    <cal:ActionMessage MethodName="AcceptRequest">
+                                                        <cal:Parameter Value="{Binding ElementName=acpt}" />
+                                                    </cal:ActionMessage>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </Button>
+
+                                        <Button Content="{Binding Reject}" CommandParameter="{Binding UserId}" x:Name="rjct">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Click">
+                                                    <cal:ActionMessage MethodName="RejectRequest">
+                                                        <cal:Parameter Value="{Binding ElementName=rjct}" />
+                                                    </cal:ActionMessage>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
+
+        <ScrollViewer Grid.Row="1" Grid.Column="2" Margin="25, 0, 25, 0" Visibility="{Binding PostsPanel}">
             <ItemsControl ItemsSource="{Binding Posts}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -71,10 +134,12 @@
                                                Foreground="White"/>
                                 </Grid>
                                 
-                                <Label Content="{Binding Description}" VerticalContentAlignment="Stretch"
-                                       Foreground="White"/>
+                                <TextBlock Text="{Binding Description}"
+                                           TextWrapping="WrapWithOverflow"
+                                           Background="White"
+                                           Foreground="CornflowerBlue"/>
 
-                                <Image Source="{Binding UrlImage}" Margin="10"/>
+                                <Image Source="{Binding UrlImage}" Margin="10" MinHeight="0" MaxHeight="340"/>
                                 <Label Content="{Binding Autor}" Foreground="White"
                                        HorizontalAlignment="Stretch"
                                        HorizontalContentAlignment="Center"/>
@@ -84,5 +149,41 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+
+        <TextBlock Text="Other users" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center"
+                   Foreground="CornflowerBlue"
+                   FontSize="13"/>
+        <Border Grid.Column="3"
+                Grid.Row="1"
+                CornerRadius="15" 
+                BorderThickness="6" 
+                Margin="15"
+                BorderBrush="CornflowerBlue">
+            <ScrollViewer Background="CornflowerBlue">
+                <ItemsControl ItemsSource="{Binding NewUsers}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding FirstName}" Margin="0, 0, 2, 0"/>
+                                        <TextBlock Text="{Binding LastName}"/>
+                                    </StackPanel>
+
+                                    <Button Grid.Row="1" Content="View profile">
+                                        
+                                    </Button>
+                                </Grid>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
     </Grid>
 </UserControl>

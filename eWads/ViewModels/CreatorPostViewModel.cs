@@ -47,13 +47,13 @@ namespace eWads.ViewModels
                 return;
             }
 
-            string url = checkedItems.First().Source != string.Empty ? checkedItems.First().Source : "about:blank";
+            string url = checkedItems.Count() == 1 ? checkedItems.First().Source : "about:blank";
             await PostService.CreatePost(new PostData()
             {
                 Title = Title,
                 Description = Description,
                 UrlImage = new Uri(url),
-                Autor = UserData.FirstName,
+                Autor = UserData.FirstName + " " + UserData.LastName,
                 CreationDate = DateTime.Now
             });
 
